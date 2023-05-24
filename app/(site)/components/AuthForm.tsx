@@ -35,11 +35,15 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
 
     try {
       const res = await fetchApi(data.api_key, 'countries')
-      console.log('res: ', res)
+
       if (res.errors.endpoint || res.errors.token) {
         setIsLoading(false)
         toast.error(
-          res.errors.endpoint ? res.errors.endpoint : res.errors.token
+          res.errors.endpoint
+            ? res.errors.endpoint
+            : res.errors.token
+            ? 'Chave incorreta!'
+            : 'Entre em contato com suporte'
         )
         return
       }
