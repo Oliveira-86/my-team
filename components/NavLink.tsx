@@ -11,7 +11,7 @@ interface NavLinkProps {
 const NavLink: FC<NavLinkProps> = ({ href, name }) => {
   return (
     <Link href={href} passHref legacyBehavior>
-      <a>{name}</a>
+      <a className="underline ">{name}</a>
     </Link>
   )
 }

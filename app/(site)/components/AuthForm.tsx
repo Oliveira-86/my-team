@@ -1,13 +1,14 @@
 'use client'
 
-import Button from '@/app/components/Button'
-import Input from '@/app/components/Input'
 import { FC, useCallback, useEffect, useState } from 'react'
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
-import { fetchApi } from '@/app/actions/api'
-import NavLink from '@/app/components/NavLink'
+import { fetchApi } from '@/actions/api'
+import Input from '@/components/Input'
+import Button from '@/components/Button'
+import NavLink from '@/components/NavLink'
+import useApikey from '@/hooks/useGetApikey'
 
 interface AuthFormProps {}
 
@@ -16,9 +17,16 @@ type Variant = 'LOGIN' | 'REGISTER'
 const AuthForm: FC<AuthFormProps> = ({}) => {
   const [variant, setVariant] = useState<Variant>('LOGIN')
   const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const loginState = useApikey()
+
   const router = useRouter()
 
-  const toggleVariant = useCallback(() => {}, [])
+  useEffect(() => {
+    if (loginState.isLoggedIn) {
+      return router.push('/home')
+    }
+  }, [loginState.isLoggedIn])
 
   const {
     register,
@@ -35,7 +43,6 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
 
     try {
       const res = await fetchApi(data.api_key, 'countries')
-
       if (res.errors.endpoint || res.errors.token) {
         setIsLoading(false)
         toast.error(
@@ -49,9 +56,10 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
       }
 
       if (res.errors.length === 0) {
+        loginState.loggin()
         toast.success('Acesso liberado!')
         setIsLoading(false)
-        router.push('/dashboard')
+        router.push('/home')
       }
     } catch (error) {
       return toast.error('Erro interno!')

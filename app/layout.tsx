@@ -1,4 +1,4 @@
-import ToasterContext from './context/ToasterContext'
+import ToasterContext from '@/context/ToasterContext'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
