@@ -36,13 +36,19 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
     try {
       const res = await fetchApi(data.api_key, 'countries')
       console.log('res: ', res)
-      if (res.errors.endpoint) {
-        return toast.error(res.errors.endpoint)
+      if (res.errors.endpoint || res.errors.token) {
+        setIsLoading(false)
+        toast.error(
+          res.errors.endpoint ? res.errors.endpoint : res.errors.token
+        )
+        return
       }
 
-      toast.success('Acesso liberado!')
-      setIsLoading(false)
-      router.push('/dashboard')
+      if (res.errors.length === 0) {
+        toast.success('Acesso liberado!')
+        setIsLoading(false)
+        router.push('/dashboard')
+      }
     } catch (error) {
       return toast.error('Erro interno!')
     }
