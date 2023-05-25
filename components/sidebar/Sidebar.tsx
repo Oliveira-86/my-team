@@ -9,7 +9,7 @@ export default async function Sidebar({
   children: React.ReactNode
 }) {
   return (
-    <div className="h-full">
+    <div className=" h-full">
       <DesktopSidebar />
       <MobileFooter />
       {children}

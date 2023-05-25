@@ -13,6 +13,7 @@ const DesktopSidebar: React.FC = () => {
       <div
         className="
         hidden 
+        lg:bg-primary-black
         lg:fixed 
         lg:inset-y-0 
         lg:left-0 
@@ -20,10 +21,10 @@ const DesktopSidebar: React.FC = () => {
         lg:w-20 
         xl:px-6
         lg:overflow-y-auto 
-        lg:bg-white 
-        lg:border-r-[1px]
-        lg:shadow-lg
+        lg:shadow-sm
+        lg:shadow-slate-300
         lg:pb-4
+        lg:mr-8
         lg:flex
         lg:flex-col
         justify-between
