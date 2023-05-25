@@ -1,13 +1,8 @@
 'use client'
 
 import { fetchApi } from '@/actions/api'
+import { CountriesType } from '@/libs/types'
 import { useEffect, useState } from 'react'
-
-export interface CountriesType {
-  name?: string
-  code?: string
-  flag?: string
-}
 
 const getCroutries = () => {
   const [countries, setCountries] = useState<CountriesType[]>([])
