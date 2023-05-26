@@ -1,10 +1,10 @@
 'use client'
 
-import getCroutries from '@/hooks/getCroutries'
+import getCroutries from '@/actions/getCroutries'
 import { FC, useState } from 'react'
 import HomeItem from './HomeItem'
 import Modal from '@/components/modais/Modal'
-import getLeaguesByCountry from '@/hooks/getLeaguesByCountry'
+import getLeaguesByCountry from '@/actions/getLeaguesByCountry'
 
 interface HomeListProps {}
 

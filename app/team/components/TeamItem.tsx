@@ -20,7 +20,7 @@ const TeamItem: FC<leagueItemProps> = (
       relative 
       flex 
       flex-col
-      md:flex-row
+      md:flex-col
       items-center  
       transition 
       lg:w-[300px] 
@@ -39,12 +39,9 @@ const TeamItem: FC<leagueItemProps> = (
       <img
         src={imgUrl}
         alt="planet-04"
-        className="lg:h-[90px] md:h-[90px] object-cover "
+        className="lg:h-[75px] md:h-[75px] object-cover "
       />
-      <div className="flex sm:flex-col mt-4 px-4 bottom-0 w-full h-full  rounded-r-md  justify-center gap-2 ">
-        <p className="lg:text-sm  md:text-xs font-bold text-white">{type}</p>
-        <p className="lg:text-sm  md:text-xs font-bold text-white">{name}</p>
-      </div>
+      <p className="mt-2 lg:text-sm  md:text-xs font-bold text-white">{name}</p>
     </div>
   )
 }

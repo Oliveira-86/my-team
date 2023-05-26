@@ -8,7 +8,7 @@ export default async function LeagueLayout({
   return (
     // @ts-expect-error Server Component
     <Sidebar>
-      <div className="h-full lg:pl-20">{children}</div>
+      <div className="min-h-full lg:pl-20">{children}</div>
     </Sidebar>
   )
 }

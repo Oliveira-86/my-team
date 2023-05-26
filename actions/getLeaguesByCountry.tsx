@@ -14,10 +14,8 @@ const getLeaguesByCountry = (name: string) => {
   const [filteredByCountry, setFilteredByCountry] = useState<
     FilteredByCountryType[]
   >([])
-  const [items, setItems] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [page, setPage] = useState(1)
 
   useEffect(() => {
     fethCountries()
@@ -26,22 +24,18 @@ const getLeaguesByCountry = (name: string) => {
   const fethCountries = async () => {
     setIsLoading(true)
     try {
-      // const res = await fetchApi('a7fe0814aca3966df878cfcec7273dbe', 'leagues')
-      // const res1 = await fetchApi(
-      //   'a7fe0814aca3966df878cfcec7273dbe',
-      //   'teams/countries'
-      // )
-      // console.log('teams/country: ', res1)
-      // if (res.response) {
-      //   const filteredByCountry = res.response.filter(
-      //     (item: any) => item.country.name === name
-      //   )
+      const res = await fetchApi('a7fe0814aca3966df878cfcec7273dbe', 'leagues')
 
-      //   if (filteredByCountry) {
-      //     setFilteredByCountry(filteredByCountry)
-      //     setIsLoading(false)
-      //   }
-      // }
+      if (res.response) {
+        const filteredByCountry = res.response.filter(
+          (item: any) => item.country.name === name
+        )
+
+        if (filteredByCountry) {
+          setFilteredByCountry(filteredByCountry)
+          setIsLoading(false)
+        }
+      }
       setIsLoading(false)
     } catch (error) {}
   }

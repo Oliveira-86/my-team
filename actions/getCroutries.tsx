@@ -6,10 +6,8 @@ import { useEffect, useState } from 'react'
 
 const getCroutries = () => {
   const [countries, setCountries] = useState<CountriesType[]>([])
-  const [items, setItems] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [page, setPage] = useState(1)
 
   useEffect(() => {
     fethCountries()

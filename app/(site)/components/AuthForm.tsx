@@ -93,7 +93,7 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
 
           <div>
             <Button disabled={isLoading} fullWidth type="submit">
-              {variant === 'LOGIN' ? 'Acessar' : 'Register'}
+              Acessar
             </Button>
           </div>
         </form>

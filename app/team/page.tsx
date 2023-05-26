@@ -1,4 +1,4 @@
-import TeamList from '../league/components/LeagueList'
+import TeamList from './components/TeamList'
 
 const Team = () => {
   return (

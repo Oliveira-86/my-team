@@ -46,6 +46,7 @@ const Select: React.FC<SelectProps> = ({ label, list, onCLick, disabled }) => {
                 w-full 
                 rounded-md
               "
+                onClick={() => {}}
               >
                 {item}
               </li>

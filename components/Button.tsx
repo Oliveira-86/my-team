@@ -41,12 +41,12 @@ const Button: React.FC<ButtonProps> = ({
         `,
         disabled && 'opacity-50 cursor-default',
         fullWidth && 'w-full',
-        secondary && 'text-slate-400 border-slate-400 border-[1px]',
+        secondary && 'text-white border-slate-400 border-[1px]',
         danger &&
           'bg-rose-500 hover:bg-rose-600 focus-visible:outline-rose-600',
         !secondary &&
           !danger &&
-          'bg-primary hover:bg-purple-600 focus-visible:outline-sky-600'
+          'bg-primary hover:bg-sky-600 focus-visible:outline-sky-600'
       )}
     >
       {children}
