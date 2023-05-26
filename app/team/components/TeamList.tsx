@@ -9,10 +9,12 @@ import getTeamsByLeague from '@/actions/getTeamsByLeague'
 import Select from '@/components/inputs/Select'
 import getLeaguesByCountry from '@/actions/getLeaguesByCountry'
 import getSeasons from '@/actions/getSeasons'
+import useApiKey from '@/hooks/useApiKey'
 
 interface TeamListProps {}
 
 const TeamList: FC<TeamListProps> = ({}) => {
+  useApiKey()
   const [isOpen, setIsOpen] = useState<boolean>()
 
   const searchParams = useSearchParams()

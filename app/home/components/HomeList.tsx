@@ -5,10 +5,12 @@ import { FC, useState } from 'react'
 import HomeItem from './HomeItem'
 import Modal from '@/components/modais/Modal'
 import getLeaguesByCountry from '@/actions/getLeaguesByCountry'
+import useApiKey from '@/hooks/useApiKey'
 
 interface HomeListProps {}
 
 const HomeList: FC<HomeListProps> = ({}) => {
+  useApiKey()
   const [isOpen, setIsOpen] = useState<boolean>()
 
   const { countries } = getCroutries()

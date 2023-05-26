@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useCallback, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
@@ -8,7 +8,6 @@ import { fetchApi } from '@/actions/api'
 import Input from '@/components/inputs/Input'
 import Button from '@/components/Button'
 import NavLink from '@/components/NavLink'
-import useApikey from '@/hooks/useGetApikey'
 
 interface AuthFormProps {}
 
@@ -18,15 +17,7 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
   const [variant, setVariant] = useState<Variant>('LOGIN')
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const loginState = useApikey()
-
   const router = useRouter()
-
-  useEffect(() => {
-    if (loginState.isLoggedIn) {
-      return router.push('/home')
-    }
-  }, [loginState.isLoggedIn])
 
   const {
     register,
@@ -56,7 +47,7 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
       }
 
       if (res.errors.length === 0) {
-        loginState.loggin()
+        localStorage.setItem('apiKey', data.apiKey)
         toast.success('Acesso liberado!')
         setIsLoading(false)
         router.push('/home')

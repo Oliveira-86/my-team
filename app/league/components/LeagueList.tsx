@@ -9,10 +9,12 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import getTeamsByLeague from '@/actions/getTeamsByLeague'
 import Link from 'next/link'
 import { SeasonsType } from '@/libs/types'
+import useApiKey from '@/hooks/useApiKey'
 
 interface LeagueListProps {}
 
 const LeagueList: FC<LeagueListProps> = ({}) => {
+  useApiKey()
   const [isOpen, setIsOpen] = useState<boolean>()
 
   const router = useRouter()
