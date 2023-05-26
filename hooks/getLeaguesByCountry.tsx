@@ -26,18 +26,22 @@ const getLeaguesByCountry = (name: string) => {
   const fethCountries = async () => {
     setIsLoading(true)
     try {
-      const res = await fetchApi('a7fe0814aca3966df878cfcec7273dbe', 'leagues')
+      // const res = await fetchApi('a7fe0814aca3966df878cfcec7273dbe', 'leagues')
+      // const res1 = await fetchApi(
+      //   'a7fe0814aca3966df878cfcec7273dbe',
+      //   'teams/countries'
+      // )
+      // console.log('teams/country: ', res1)
+      // if (res.response) {
+      //   const filteredByCountry = res.response.filter(
+      //     (item: any) => item.country.name === name
+      //   )
 
-      if (res.response) {
-        const filteredByCountry = res.response.filter(
-          (item: any) => item.country.name === name
-        )
-
-        if (filteredByCountry) {
-          setFilteredByCountry(filteredByCountry)
-          setIsLoading(false)
-        }
-      }
+      //   if (filteredByCountry) {
+      //     setFilteredByCountry(filteredByCountry)
+      //     setIsLoading(false)
+      //   }
+      // }
       setIsLoading(false)
     } catch (error) {}
   }

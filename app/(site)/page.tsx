@@ -5,7 +5,7 @@ const Auth = () => {
     <div
       className="
         flex 
-        min-h-full 
+        h-full 
         flex-col 
         justify-center 
         py-12 

@@ -5,7 +5,7 @@ import { useForm, FieldValues, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { fetchApi } from '@/actions/api'
-import Input from '@/components/Input'
+import Input from '@/components/inputs/Input'
 import Button from '@/components/Button'
 import NavLink from '@/components/NavLink'
 import useApikey from '@/hooks/useGetApikey'
@@ -62,12 +62,13 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
         router.push('/home')
       }
     } catch (error) {
+      console.log('login error: ', error)
       return toast.error('Erro interno!')
     }
   }
 
   return (
-    <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md h-full">
       <div
         className="
             bg-primary-black

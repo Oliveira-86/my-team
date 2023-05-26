@@ -1,5 +1,4 @@
 export const fetchApi = (api_key: string, endpoint?: string) => {
-  console.log({ api_key, endpoint })
   let myHeaders = new Headers()
   myHeaders.append('x-rapidapi-key', api_key)
   myHeaders.append('x-rapidapi-host', 'v3.football.api-sports.io')

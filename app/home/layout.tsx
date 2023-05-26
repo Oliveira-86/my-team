@@ -8,7 +8,7 @@ export default async function HomeLayout({
   return (
     // @ts-expect-error Server Component
     <Sidebar>
-      <div className="lg:pl-20">{children}</div>
+      <div className="h-full lg:pl-20">{children}</div>
     </Sidebar>
   )
 }
