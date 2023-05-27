@@ -9,10 +9,17 @@ interface SelectProps {
   list?: string[]
   onCLick?: () => void
   disabled?: boolean
+  sendData?: any
 }
 
-const Select: React.FC<SelectProps> = ({ label, list, onCLick, disabled }) => {
+const Select: React.FC<SelectProps> = ({ label, list, sendData }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const onClick = (year: string) => {
+    sendData(year)
+    setIsOpen((state) => !state)
+  }
+
   return (
     <div className="relative z-[100] w-[200]">
       <Button secondary onClick={() => setIsOpen((state) => !state)} fullWidth>
@@ -46,7 +53,7 @@ const Select: React.FC<SelectProps> = ({ label, list, onCLick, disabled }) => {
                 w-full 
                 rounded-md
               "
-                onClick={() => {}}
+                onClick={() => onClick(item)}
               >
                 {item}
               </li>

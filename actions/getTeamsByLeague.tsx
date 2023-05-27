@@ -17,7 +17,7 @@ const getTeamsByLeague = (league: string, season: string) => {
 
   useEffect(() => {
     fethCountries()
-  }, [])
+  }, [season, league])
 
   const fethCountries = async () => {
     setIsLoading(true)

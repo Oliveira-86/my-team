@@ -15,7 +15,11 @@ interface TeamListProps {}
 
 const TeamList: FC<TeamListProps> = ({}) => {
   useApiKey()
+  const date = new Date()
+  const currentYear = date.getFullYear()
+
   const [isOpen, setIsOpen] = useState<boolean>()
+  const [seasoonYear, setSeasonYear] = useState<string>(String(currentYear))
 
   const searchParams = useSearchParams()
   const leagueName = searchParams.get('leagueName')
@@ -25,13 +29,11 @@ const TeamList: FC<TeamListProps> = ({}) => {
 
   const { seasons } = getSeasons(index!, country!)
 
-  const date = new Date()
-  const currentYear = date.getFullYear()
+  const { teamsByLeague } = getTeamsByLeague(String(leagueId!), seasoonYear)
 
-  const { teamsByLeague } = getTeamsByLeague(
-    String(leagueId!),
-    String(currentYear)
-  )
+  const sendData = (data: string) => {
+    setSeasonYear(data)
+  }
 
   return (
     <>
@@ -42,9 +44,13 @@ const TeamList: FC<TeamListProps> = ({}) => {
           </h1>
           <div className="flex justify-between gap-2">
             <h3 className="mb-16 md:mb-2 mt-2 text-center lg:text-start text-slate-400 font-bold">
-              Temporada {currentYear}
+              Temporada {seasoonYear}
             </h3>
-            <Select label="Temporadas" />
+            <Select
+              label="Temporadas"
+              list={seasons?.reverse()}
+              sendData={sendData}
+            />
           </div>
         </div>
         <div className=" lg:grid lg:grid-cols-4 lg:gap-3 md:grid md:grid-cols-3 md:gap-3 flex flex-col items-center">
