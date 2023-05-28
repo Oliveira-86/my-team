@@ -1,116 +1,33 @@
+'use client'
+
 import Button from '@/components/Button'
 import Select from '@/components/inputs/Select'
 import Image from 'next/image'
 import { FC } from 'react'
 import PlayerItem from './components/PlayerItem'
 import FormationItem from './components/FormationItem'
-import { Chart } from './components/Chart'
+import Chart from './components/Chart'
+import { useSearchParams } from 'next/navigation'
+import getTeamsById from '@/actions/getTeamsById'
+import getPlayersByTeam from '@/actions/getPlayersByTeam'
 
-interface TeamProps {}
+const Team = () => {
+  const searchParams = useSearchParams()
+  const teamId = searchParams.get('teamId')
+  const leagueId = searchParams.get('leagueId')
+  const season = searchParams.get('season')
 
-const seasons = ['2018', '2019', '2020', '2021', '2022', '2023']
-const players = [
-  {
-    name: 'Neymar Junior',
-    age: 33,
-    nationality: 'Brazil',
-  },
-  {
-    name: 'Lionel Messi',
-    age: 36,
-    nationality: 'Argetina',
-  },
-  {
-    name: 'Vinicius Junior',
-    age: 22,
-    nationality: 'Brazil',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-  {
-    name: 'Jack Grealish',
-    age: 23,
-    nationality: 'Gales',
-  },
-]
-const formations = [
-  {
-    formation: '4-2-3-1',
-    played: 22,
-  },
-  {
-    formation: '4-4-2',
-    played: 13,
-  },
-  {
-    formation: '3-5-2',
-    played: 3,
-  },
-  {
-    formation: '4-3-3',
-    played: 16,
-  },
-]
+  const { playersByTeamId } = getPlayersByTeam(
+    Number(teamId),
+    Number(leagueId),
+    Number(season)
+  )
+  const { teamsById, goalsByMinute } = getTeamsById(
+    Number(teamId),
+    Number(leagueId),
+    Number(season)
+  )
 
-const Team: FC<TeamProps> = ({}) => {
   return (
     <div className="min-h-full bg-primary-black p-10 ">
       <div className="flex gap-3 items-center justify-between mb-10">
@@ -119,18 +36,18 @@ const Team: FC<TeamProps> = ({}) => {
             width={80}
             height={80}
             alt="Escudo do time"
-            src="https://media.api-sports.io/football/teams/33.png"
+            src={teamsById?.team?.logo!}
           />
           <p className="text-slate-100 font-semibold lg:text-3xl">
-            Manchester United
+            {teamsById?.team?.name}
           </p>
         </div>
-        <Select label="Temporadas" list={seasons} />
+        <Select label="Temporadas" />
       </div>
       <div className="flex flex-col md:flex-row mt-4">
         <div className="lg:w-[50%] rounded-sm">
           <h2 className="text-slate-200 text-lg lg:w-[50%] text-center font-semibold mb-2">
-            Premier League
+            {teamsById?.league.name}
           </h2>
           <div
             className="
@@ -174,44 +91,47 @@ const Team: FC<TeamProps> = ({}) => {
               rounded-b-md"
           >
             <p className="text-slate-200  font-normal w-[30%] flex items-center justify-center">
-              20
+              {teamsById?.fixtures.wins.total}
             </p>
             <p className="text-slate-200  font-normal w-[30%] flex items-center justify-center">
-              11
+              {teamsById?.fixtures.draws.total}
             </p>
             <p className="text-slate-200  font-normal w-[30%] flex items-center justify-center">
-              13
+              {teamsById?.fixtures.loses.total}
             </p>
             <p className="text-slate-200  font-normal w-[30%] flex items-center justify-center">
-              44
+              {teamsById?.fixtures.played.total}
             </p>
           </div>
           <h2 className="mt-8 text-slate-200 text-lg lg:w-[50%] text-center font-semibold mb-2">
             Formation
           </h2>
           <div className="lg:w-[100%] rounded-sm ">
-            {formations.map(({ formation, played }, index) => (
+            {teamsById?.lineups.map(({ formation, played }, index) => (
               <FormationItem
                 formation={formation}
                 played={played}
                 isPar={index % 2 === 0}
                 index={index}
-                length={formations.length}
+                length={teamsById?.lineups.length}
               />
             ))}
           </div>
           <div className="pr-8 h-[300px] mt-8">
-            <Chart />
+            <Chart goalsByMinute={goalsByMinute!} />
           </div>
         </div>
 
-        <div className="lg:w-[50%] flex items-end">
-          <div className="w-full grid grid-cols-2 gap-2">
-            {players.map((player) => (
+        <div className="lg:w-[50%] ">
+          <h2 className="text-slate-200 text-xl lg:w-[50%] font-semibold mb-2">
+            Jogadores
+          </h2>
+          <div className="w-full grid grid-cols-2 gap-y-2 gap-x-4">
+            {playersByTeamId.map((player) => (
               <PlayerItem
                 name={player.name}
                 age={player.age}
-                nationality={player.nationality}
+                src={player.photo}
               />
             ))}
           </div>

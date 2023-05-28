@@ -4,23 +4,25 @@ import getCroutries from '@/actions/getCroutries'
 import { FC, useState } from 'react'
 import TeamItem from './TeamItem'
 import Modal from '@/components/modais/Modal'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import getTeamsByLeague from '@/actions/getTeamsByLeague'
 import Select from '@/components/inputs/Select'
 import getLeaguesByCountry from '@/actions/getLeaguesByCountry'
 import getSeasons from '@/actions/getSeasons'
 import useApiKey from '@/hooks/useApiKey'
+import Link from 'next/link'
 
 interface TeamListProps {}
 
 const TeamList: FC<TeamListProps> = ({}) => {
-  useApiKey()
+  // useApiKey()
   const date = new Date()
   const currentYear = date.getFullYear()
 
   const [isOpen, setIsOpen] = useState<boolean>()
-  const [seasoonYear, setSeasonYear] = useState<string>(String(currentYear))
+  const [seasonYear, setSeasonYear] = useState<string>(String(currentYear))
 
+  const router = useRouter()
   const searchParams = useSearchParams()
   const leagueName = searchParams.get('leagueName')
   const leagueId = searchParams.get('leagueId')
@@ -29,7 +31,7 @@ const TeamList: FC<TeamListProps> = ({}) => {
 
   const { seasons } = getSeasons(index!, country!)
 
-  const { teamsByLeague } = getTeamsByLeague(String(leagueId!), seasoonYear)
+  const { teamsByLeague } = getTeamsByLeague(String(leagueId!), seasonYear)
 
   const sendData = (data: string) => {
     setSeasonYear(data)
@@ -44,7 +46,7 @@ const TeamList: FC<TeamListProps> = ({}) => {
           </h1>
           <div className="flex justify-between gap-2">
             <h3 className="mb-16 md:mb-2 mt-2 text-center lg:text-start text-slate-400 font-bold">
-              Temporada {seasoonYear}
+              Temporada {seasonYear}
             </h3>
             <Select
               label="Temporadas"
@@ -54,8 +56,24 @@ const TeamList: FC<TeamListProps> = ({}) => {
           </div>
         </div>
         <div className=" lg:grid lg:grid-cols-4 lg:gap-3 md:grid md:grid-cols-3 md:gap-3 flex flex-col items-center">
-          {teamsByLeague?.map((item) => (
-            <TeamItem imgUrl={item.team?.logo} name={item.team.name} />
+          {teamsByLeague?.map((item, key) => (
+            <Link
+              key={item.team.id}
+              href={{
+                pathname: `/team/${item.team.id}`,
+                query: {
+                  leagueId,
+                  season: seasonYear,
+                  teamId: item.team.id,
+                },
+              }}
+            >
+              <TeamItem
+                imgUrl={item.team?.logo}
+                name={item.team.name}
+                key={item.team.id}
+              />
+            </Link>
           ))}
         </div>
       </div>
