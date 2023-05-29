@@ -41,18 +41,20 @@ const TeamList: FC<TeamListProps> = ({}) => {
     <>
       <div className=" p-8 pt-8">
         <div className="lg:ml-24">
-          <h1 className="mb-16 md:mb-2 text-center lg:text-start text-slate-100 font-bold text-5xl">
+          <h1 className="mb-2 text-center lg:text-start text-slate-100 font-bold text-5xl">
             Times da {leagueName}
           </h1>
-          <div className="flex justify-between gap-2">
-            <h3 className="mb-16 md:mb-2 mt-2 text-center lg:text-start text-slate-400 font-bold">
+          <div className="flex flex-col gap-2">
+            <h3 className="mb-2 text-center lg:text-start text-slate-400 font-bold">
               Temporada {seasonYear}
             </h3>
-            <Select
-              label="Temporadas"
-              list={seasons?.reverse()}
-              sendData={sendData}
-            />
+            <div className="w-[200px] self-center">
+              <Select
+                label="Temporadas"
+                list={seasons?.reverse()}
+                sendData={sendData}
+              />
+            </div>
           </div>
         </div>
         <div className=" lg:grid lg:grid-cols-4 lg:gap-3 md:grid md:grid-cols-3 md:gap-3 flex flex-col items-center">
