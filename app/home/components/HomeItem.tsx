@@ -27,15 +27,16 @@ const HomeItem: FC<HomeItemProps> = ({ imgUrl, name, code, onClick }, key) => {
           flex 
           items-center 
           justify-center 
-          lg:w-[190px] 
-          lg:h-[190px] 
-          md:w-[220px] 
-          md:h-[220px] 
-          w-[350px] 
-          h-[250px] 
+          lg:w-[140px] 
+          lg:h-[140px] 
+          md:w-[160px] 
+          md:h-[160px] 
+          w-[250px] 
+          h-[200px] 
           ease-out-flex 
           cursor-pointer 
           sm:mt-6 
+          hover:scale-105 
         "
       >
         <img
@@ -49,13 +50,13 @@ const HomeItem: FC<HomeItemProps> = ({ imgUrl, name, code, onClick }, key) => {
             object-cover 
             rounded-[24px]
             cursor-pointer 
-            hover:scale-110 
-            transition 
-            translate"
+            transition
+            
+            "
         />
         <div className="absolute px-4 bottom-0 w-full h-[30%] bg-[rgba(0,0,0,0.6)]  rounded-b-[23px] flex flex-col justify-center">
-          <p className="lg:text-lg font-bold text-white">{name}</p>
-          <p className="lg:text-lg font-bold text-white">{code}</p>
+          <p className="lg:text-sm font-bold text-white">{name}</p>
+          <p className="lg:text-sm font-bold text-white">{code}</p>
         </div>
       </div>
     </Link>
