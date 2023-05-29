@@ -15,6 +15,8 @@ const getTeamsByLeague = (league: string, season: string) => {
   const [error, setError] = useState(null)
   const [page, setPage] = useState(1)
 
+  const apiKey = localStorage.getItem('apiKey')
+
   useEffect(() => {
     fethCountries()
   }, [season, league])
@@ -23,10 +25,10 @@ const getTeamsByLeague = (league: string, season: string) => {
     setIsLoading(true)
     try {
       const res = await fetchApi(
-        'a7fe0814aca3966df878cfcec7273dbe',
+        apiKey!,
         `teams?league=${league}&season=${season}`
       )
-      console.log(res)
+
       if (res) {
         setTeamsByLeague(res.response)
         setIsLoading(false)

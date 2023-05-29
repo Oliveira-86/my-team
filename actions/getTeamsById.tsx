@@ -56,6 +56,8 @@ const getTeamsById = (teamId: number, leagueId: number, season: number) => {
   const [error, setError] = useState(null)
   const [page, setPage] = useState(1)
 
+  const apiKey = localStorage.getItem('apiKey')
+
   useEffect(() => {
     fethTeamStatistics()
   }, [season, leagueId, teamId])
@@ -64,7 +66,7 @@ const getTeamsById = (teamId: number, leagueId: number, season: number) => {
     setIsLoading(true)
     try {
       const res = await fetchApi(
-        'a7fe0814aca3966df878cfcec7273dbe',
+        apiKey!,
         `teams/statistics?season=${season}&team=${teamId}&league=${leagueId}`
       )
 

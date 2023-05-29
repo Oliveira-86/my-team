@@ -8,7 +8,7 @@ const getSeasons = (index: string, country: string) => {
   const seasons = seasonsList[Number(index)]?.map((item: any) => item.year)
 
   return {
-    seasons: seasons?.reverse(),
+    seasons: seasons,
   }
 }
 

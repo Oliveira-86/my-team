@@ -9,6 +9,8 @@ const getCroutries = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
+  const apiKey = localStorage.getItem('apiKey')
+
   useEffect(() => {
     fethCountries()
   }, [])
@@ -16,15 +18,12 @@ const getCroutries = () => {
   const fethCountries = async () => {
     setIsLoading(true)
     try {
-      // const res = await fetchApi(
-      //   'a7fe0814aca3966df878cfcec7273dbe',
-      //   'countries'
-      // )
+      const res = await fetchApi(apiKey!, 'countries')
 
-      // if (res.response) {
-      //   setCountries(res.response)
-      //   setIsLoading(false)
-      // }
+      if (res.response) {
+        setCountries(res.response)
+        setIsLoading(false)
+      }
       setIsLoading(false)
     } catch (error) {}
   }

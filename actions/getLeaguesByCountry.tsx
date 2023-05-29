@@ -17,6 +17,8 @@ const getLeaguesByCountry = (name: string) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
+  const apiKey = localStorage.getItem('apiKey')
+
   useEffect(() => {
     fethCountries()
   }, [])
@@ -24,7 +26,7 @@ const getLeaguesByCountry = (name: string) => {
   const fethCountries = async () => {
     setIsLoading(true)
     try {
-      const res = await fetchApi('a7fe0814aca3966df878cfcec7273dbe', 'leagues')
+      const res = await fetchApi(apiKey!, 'leagues')
 
       if (res.response) {
         const filteredByCountry = res.response.filter(

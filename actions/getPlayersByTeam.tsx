@@ -17,6 +17,8 @@ const getPlayersByTeam = (teamId: number, playerId: number, season: number) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
+  const apiKey = localStorage.getItem('apiKey')
+
   useEffect(() => {
     fetchPlayers()
   }, [teamId, playerId, season])
@@ -24,10 +26,7 @@ const getPlayersByTeam = (teamId: number, playerId: number, season: number) => {
   const fetchPlayers = async () => {
     setIsLoading(true)
     try {
-      const res = await fetchApi(
-        'a7fe0814aca3966df878cfcec7273dbe',
-        `players/squads?team=${teamId}`
-      )
+      const res = await fetchApi(apiKey!, `players/squads?team=${teamId}`)
 
       if (res) {
         const players = res.response[0].players
