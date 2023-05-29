@@ -20,13 +20,11 @@ const FormationItem: FC<FormationItemProps> = ({
     <div
       className={clsx(
         `
-            text-start
-            w-[50%] 
-            border-[1px] 
-            border-slate-500 
-            
-            px-4 py-2
-          `,
+          text-start
+          border-[1px] 
+          border-slate-500 
+          px-4 py-2
+        `,
         isPar ? 'bg-secondary-black' : 'bg-primary-black',
         index === 0 && 'rounded-t-md',
         length && index === length - 1 && 'rounded-b-md'

@@ -1,9 +1,6 @@
 'use client'
 
-import Button from '@/components/Button'
-import Select from '@/components/inputs/Select'
 import Image from 'next/image'
-import { FC } from 'react'
 import PlayerItem from './components/PlayerItem'
 import FormationItem from './components/FormationItem'
 import Chart from './components/Chart'
@@ -32,7 +29,7 @@ const Team = () => {
 
   return (
     <div className="min-h-full bg-primary-black p-10 ">
-      <div className="flex gap-3 items-center justify-between mb-10">
+      <div className=" mb-10">
         <div className="flex gap-3 items-center justify-center lg:justify-start">
           <Image
             width={80}
@@ -40,16 +37,24 @@ const Team = () => {
             alt="Escudo do time"
             src={teamsById?.team?.logo!}
           />
-          <p className="text-slate-100 font-semibold lg:text-3xl">
+          <p className="text-slate-100 font-semibold text-3xl">
             {teamsById?.team?.name}
           </p>
         </div>
-        <Select label="Temporadas" />
       </div>
-      <div className="flex flex-col md:flex-row mt-4">
-        <div className="lg:w-[50%] rounded-sm">
+      <div className="flex flex-col lg:flex-row mt-4">
+        <div
+          className="
+              lg:w-[50%] 
+              rounded-sm 
+              flex
+              flex-col
+              items-center
+              lg:items-start
+              "
+        >
           <h2 className="text-slate-200 text-lg lg:w-[50%] text-center font-semibold mb-2">
-            {teamsById?.league.name}
+            {teamsById?.league?.name}
           </h2>
           <div
             className="
@@ -58,13 +63,12 @@ const Team = () => {
               justify-evenly 
               w-[50%] 
               lg:bg-secondary-black 
+              lg:w-[70%]
               border-[1px] 
               border-slate-500 
               py-1 
               px-2
-              rounded-t-md
-
-              "
+              rounded-t-md"
           >
             <p className="text-slate-200 font-bold flex w-[30%] items-center justify-center">
               Vitória
@@ -85,6 +89,7 @@ const Team = () => {
               items-start 
               justify-around 
               w-[50%] 
+              lg:w-[70%]
               lg:bg-primary-black 
               border-[1px] 
               border-slate-500 
@@ -93,33 +98,35 @@ const Team = () => {
               rounded-b-md"
           >
             <p className="text-slate-200  font-normal w-[30%] flex items-center justify-center">
-              {teamsById?.fixtures.wins.total}
+              {teamsById?.fixtures?.wins?.total}
             </p>
             <p className="text-slate-200  font-normal w-[30%] flex items-center justify-center">
-              {teamsById?.fixtures.draws.total}
+              {teamsById?.fixtures?.draws?.total}
             </p>
             <p className="text-slate-200  font-normal w-[30%] flex items-center justify-center">
-              {teamsById?.fixtures.loses.total}
+              {teamsById?.fixtures?.loses?.total}
             </p>
             <p className="text-slate-200  font-normal w-[30%] flex items-center justify-center">
-              {teamsById?.fixtures.played.total}
+              {teamsById?.fixtures?.played?.total}
             </p>
           </div>
           <h2 className="mt-8 text-slate-200 text-lg lg:w-[50%] text-center font-semibold mb-2">
             Formation
           </h2>
-          <div className="lg:w-[100%] rounded-sm ">
-            {teamsById?.lineups.map(({ formation, played }, index) => (
-              <FormationItem
-                formation={formation}
-                played={played}
-                isPar={index % 2 === 0}
-                index={index}
-                length={teamsById?.lineups.length}
-              />
-            ))}
+          <div className="flex flex-col w-[50%] lg:w-[70%] items-center justify-center">
+            <div className="w-[100%] rounded-sm">
+              {teamsById?.lineups?.map(({ formation, played }, index) => (
+                <FormationItem
+                  formation={formation}
+                  played={played}
+                  isPar={index % 2 === 0}
+                  index={index}
+                  length={teamsById?.lineups?.length}
+                />
+              ))}
+            </div>
           </div>
-          <div className="pr-8 h-[300px] mt-8">
+          <div className="h-[300px] mt-8 w-full flex item-center">
             <Chart goalsByMinute={goalsByMinute!} />
           </div>
         </div>
@@ -129,7 +136,7 @@ const Team = () => {
             Jogadores
           </h2>
           <div className="w-full grid grid-cols-2 gap-y-2 gap-x-4">
-            {playersByTeamId.map((player) => (
+            {playersByTeamId?.map((player) => (
               <PlayerItem
                 name={player.name}
                 age={player.age}

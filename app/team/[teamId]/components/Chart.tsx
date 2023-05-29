@@ -20,17 +20,6 @@ interface ChartType {
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const Chart: FC<ChartType> = ({ goalsByMinute }) => {
-  // const [periodOfTime, setPeriodOfTime] = useState<string[]>([])
-  // const [goals, setGoals] = useState<number[]>([])
-
-  // useEffect(() => {
-  //   if (goalsByMinute) {
-  //     const values = Object.values(goalsByMinute)
-  //     const key =
-  //     // setPeriodOfTime(key)
-  //     // setGoals(goals)
-  //   }
-  // }, [])
   const periodOfTime = useMemo(() => {
     if (goalsByMinute) {
       return Object.keys(goalsByMinute)
@@ -65,9 +54,6 @@ const Chart: FC<ChartType> = ({ goalsByMinute }) => {
       },
     },
   }
-
-  const labels = ['0-15', '16-30', '31-45', '46-60', '61-75', '76-90']
-  // const score = [3, 1, 4, 5, 2, 4]
 
   const data = useMemo(() => {
     return {

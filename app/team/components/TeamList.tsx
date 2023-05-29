@@ -48,7 +48,7 @@ const TeamList: FC<TeamListProps> = ({}) => {
             <h3 className="mb-2 text-center lg:text-start text-slate-400 font-bold">
               Temporada {seasonYear}
             </h3>
-            <div className="w-[200px] self-center">
+            <div className="w-[200px] self-center md:self-auto">
               <Select
                 label="Temporadas"
                 list={seasons?.reverse()}
