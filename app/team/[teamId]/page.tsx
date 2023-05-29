@@ -10,8 +10,10 @@ import Chart from './components/Chart'
 import { useSearchParams } from 'next/navigation'
 import getTeamsById from '@/actions/getTeamsById'
 import getPlayersByTeam from '@/actions/getPlayersByTeam'
+import useApiKey from '@/hooks/useApiKey'
 
 const Team = () => {
+  useApiKey()
   const searchParams = useSearchParams()
   const teamId = searchParams.get('teamId')
   const leagueId = searchParams.get('leagueId')
