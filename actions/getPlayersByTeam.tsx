@@ -30,7 +30,6 @@ const getPlayersByTeam = (teamId: number, playerId: number, season: number) => {
 
       if (res) {
         const players = res.response[0].players
-
         // A API-FOOTBALL limita em 10 acesso por segundo, por isso não consegui mostra a nacionalidade dos jogadores,
         // mas segue abaixo a função que buscaria a nacionalidade de cada jogador alem de outros dados.
 
