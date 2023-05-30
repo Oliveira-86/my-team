@@ -41,7 +41,7 @@ const MobileItem: React.FC<MobileItemProps> = ({
         hover:text-black 
         hover:bg-slate-100
       `,
-        active && 'bg-gray-100 text-black'
+        active && 'bg-secondary-black text-black'
       )}
     >
       <Icon className="h-6 w-6" />

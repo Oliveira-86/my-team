@@ -38,10 +38,10 @@ const DesktopItem: React.FC<DesktopItemProps> = ({
             leading-6 
             font-semibold 
             text-slate-400 
-            hover:text-black 
-            hover:bg-gray-100
+            hover:text-slate-100 
+            hover:bg-secondary-black
           `,
-          active && 'bg-gray-100 text-black'
+          active && 'bg-secondary-black text-black'
         )}
       >
         <Icon className="h-6 w-6 shrink-0" aria-hidden="true" />
