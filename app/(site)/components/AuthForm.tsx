@@ -34,6 +34,7 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
 
     try {
       const res = await fetchApi(data.api_key, 'countries')
+
       if (res.errors.endpoint || res.errors.token) {
         setIsLoading(false)
         toast.error(
@@ -47,7 +48,7 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
       }
 
       if (res.errors.length === 0) {
-        localStorage.setItem('apiKey', data.apiKey)
+        localStorage.setItem('apiKey', data.api_key)
         toast.success('Acesso liberado!')
         setIsLoading(false)
         router.push('/home')

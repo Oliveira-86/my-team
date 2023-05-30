@@ -7,4 +7,5 @@ body,
 :root {
   min-height: 100% !important;
   height: 100%;
+  background-color: #2f293a;
 }

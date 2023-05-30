@@ -1,3 +1,5 @@
+'use client'
+
 import { useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 import { TbCarouselHorizontal } from 'react-icons/tb'
@@ -9,15 +11,15 @@ const useRoutes = () => {
   const routes = useMemo(
     () => [
       {
-        label: 'Users',
-        href: '/users',
+        label: 'Home',
+        href: '/home',
         icon: TbCarouselHorizontal,
-        active: pathname === '/users',
+        active: pathname === '/home',
       },
       {
         label: 'Logout',
-        onClick: () => {},
-        href: '',
+        onClick: () => localStorage.clear(),
+        href: '/',
         icon: HiArrowLeftOnRectangle,
       },
     ],
